@@ -1,5 +1,6 @@
 import template from './json-export.html'
 import { importer } from '../../util/parser'
+import JSZip from 'jszip'
 
 export default {
   template,
@@ -13,14 +14,36 @@ export default {
     return {
       data: null,
       error: null,
-      name: 'all.json',
-      locale: ''
+      name: 'all.zip',
+      locale: '',
+      download: null
     }
   },
   mounted () {
     this.update()
   },
   methods: {
+    downloadZip () {
+      const zip = new JSZip()
+      zip.file('all.json', JSON.stringify(this.json, null, 2))
+
+      let language = {}
+      this.json.forEach((item) => {
+        item.language.forEach((entry) => {
+          if (!language[entry.locale])language[entry.locale] = {}
+          language[entry.locale][item.id] = entry.content
+        })
+      })
+
+      for (let locale in language) {
+        zip.file(`${locale}.json`, JSON.stringify(language[locale], null, 2))
+      }
+
+      zip.generateAsync({type: 'blob'})
+      .then((content) => {
+        this.download = window.URL.createObjectURL(new window.Blob([content], { type: 'application/zip' }))
+      })
+    },
     update () {
       this.data = JSON.stringify(this.json, null, 2)
     },
@@ -94,11 +117,11 @@ export default {
     }
   },
   computed: {
+    locales () {
+      return this.$store.getters.availableLocales
+    },
     stats () {
       return this.$store.getters.stats
-    },
-    download () {
-      return window.URL.createObjectURL(new window.Blob([this.data], { type: 'text/json;charset=utf-8' }))
     }
   }
 }

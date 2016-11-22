@@ -3,7 +3,8 @@
     <input style="visibility:hidden" id="file" type="file" accept=".csv, .json" @change="onFileChange"></input>
   </form>
   <button><label for="file">Load JSON or CSV file</label></button>
-  <p v-if="data"><a :download="name" :href="download">Download JSON file</a></p>
+  <p v-if="download"><a :download="name" :href="download">Download JSON file</a></p>
+  <p @click.prevent="downloadZip">Generate download</p>
 
   <div v-if="stats">
     <h2>Stats</h2>
