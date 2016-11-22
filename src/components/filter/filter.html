@@ -1,0 +1,19 @@
+<div class="filter-component">
+  <button
+    v-for="button in buttons"
+    @click.prevent="onButton(button.action)">
+    {{button.label}}
+  </button>
+
+  <div class="locale-filter">
+    <div class="filter-checkbox" v-if="filter">
+      <input type="checkbox" v-model="checkbox">empties only</input>
+    </div>
+    locale filter:
+    <select v-model="filter">
+      <option value="">all</option>
+      <option v-for="locale in dropdown" :value="locale">{{locale}}</option>
+    </select>
+  </div>
+
+</div>

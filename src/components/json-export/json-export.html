@@ -1,0 +1,12 @@
+<div class="json-export-component">
+  <form action="#">
+    <input style="visibility:hidden" id="file" type="file" accept=".json" @change="onFileChange"></input>
+  </form>
+  <button><label for="file">Load JSON file</label></button>
+  <p v-if="data"><a :download="name" :href="download">Download JSON file</a></p>
+  <div v-if="data">
+    <h2>Export</h2>
+    <pre>{{data}}</pre>
+  </div>
+  <p v-if="error">{{error}}</p>
+</div>

@@ -1,0 +1,22 @@
+<div class="tag-component">
+  <h2>{{ title }}</h2>
+  <div class="input-group">
+    <label for="id">Tag ID</label>
+    <input v-model="id" type="text" id="id" name="id"></input>
+    <p class="validation-error" v-show="error">{{error}}</p>
+  </div>
+  <h4>Description</h4>
+  <textarea v-model="description"></textarea>
+  <div class="create-tag-buttons">
+    <button
+      @click.prevent="onButton(id, description, false)">
+      cancel
+    </button>
+    <button
+      :disabled="isInvalid"
+      @click.prevent="onButton(id, description, true)">
+      create
+    </button>
+  </div>
+
+</div>

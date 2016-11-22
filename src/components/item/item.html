@@ -1,0 +1,8 @@
+<div class="item-component">
+  <h4 v-if="locale">locale: {{ locale }}</h4>
+  <textarea v-model="item.content"></textarea>
+  <button v-for="button in buttons"
+    @click.prevent="onButton(item, item.content, locale)">
+      {{ button.label }}
+  </button>
+</div>

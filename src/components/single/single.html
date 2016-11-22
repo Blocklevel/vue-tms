@@ -1,0 +1,15 @@
+<div class="single-component">
+  <div v-if="!locale">
+    <h3>Select a locale</h3>
+    <p>To see a summary of all the ids with their translation, select a locale from the filter...</p>
+  </div>
+  <div v-if="locale">
+    <p>locale: {{locale}}</p>
+    <div class="row" v-for="(item, index) in json">
+      <div class="tag">
+          {{item.id}}
+      </div>
+      <div class="content" v-html="content(item, locale)"></div>
+    </div>
+  </div>
+</div>

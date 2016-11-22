@@ -1,0 +1,10 @@
+<div class="collection-component">
+  <h2>ID: {{item.id}}</h2>
+  <textarea disabled v-model="item.description"></textarea>
+  <button
+    v-for="button in buttons"
+    :disabled="button.disabled"
+    @click.prevent="onButton(button.action)">
+      {{button.label}}
+  </button>
+<div>

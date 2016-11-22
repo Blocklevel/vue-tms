@@ -1,0 +1,16 @@
+export const json = state => state.json
+export const isLoading = state => state.isLoading
+export const availableLocales = state => state.availableLocales
+export const currentItem = state => state.currentItem
+export const createItem = state => state.createItem
+export const addItem = state => state.addItem
+export const addLocale = state => state.addLocale
+export const menuIsOpen = state => state.menuIsOpen
+export const removeItem = state => state.removeItem
+export const locales = state => state.locales
+export const isSummaryOpen = state => state.isSummaryOpen
+export const isExportOpen = state => state.isExportOpen
+export const localeIsDisabled = state => state.localeIsDisabled
+export const filter = state => state.filter
+export const emptiesOnly = state => state.emptiesOnly
+export const search = state => state.search

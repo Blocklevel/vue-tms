@@ -1,0 +1,109 @@
+<div class="copy-editor-component">
+
+  <custom-filter
+    :dropdown="availableLocales"
+    :buttons="
+    [
+      { label: '[]', action: 'toggle' },
+      { label: '+', action: 'add' },
+      { label: '->', action: 'export' },
+      { label: '?', action: 'summary' }
+    ]"
+  />
+
+  <div class="container">
+
+    <div class="left">
+
+      <div class="all-tags" v-show="menuIsOpen">
+        <search v-show="json && json.length"/>
+        <div v-show="!json || !json.length">Start by creating a tags or import data</div>
+        <div v-show="!hasResults">No matches are found</div>
+        <ul>
+          <li
+            v-for="item in json"
+            v-show="isItemVisibleInMenu(item)"
+            v-html="highlight(item.id)"
+            @click.prevent="onItemSelect(item)"
+            :class="{ active:currentItem === item }"
+          />
+        </ul>
+      </div>
+    </div>
+
+    <div class="right" :class="{ open:menuIsOpen }">
+      <single :json="json" v-if="isSummaryOpen" :locale="currentLanguageFilter"/>
+      <splash v-show="!currentItem && !isExportOpen && !isSummaryOpen">
+        <h3>Blue Copy Editor</h3>
+        <!-- <stats :json="json" :locales="availableLocales"/> !-->
+      </splash>
+      <json-export v-if="isExportOpen" :json="json"></json-export>
+      <div class="overview" v-if="currentItem && !addLocale">
+        <collection
+          :item="currentItem"
+          v-if="isVisible"
+          :buttons="
+          [
+            { label: 'remove', action: 'remove' },
+            { label: 'add locale', action: 'add', disabled:localeIsDisabled}
+          ]"
+        />
+        <tag
+          v-if="createItem"
+          :item="createItem"
+          :json="json"
+          :onButton="onCreateID"
+          title="Create a tag"
+        />
+
+        <item
+          v-for="item in currentItem.language"
+          v-if="isVisible && (!filter || filter == item.locale)"
+          :item="item"
+          :locale="item.locale"
+          :buttons="[ { label:'remove' } ]"
+          :onButton="onRemoveLocale"
+        />
+      </div>
+
+      <div class="overview overview-desc" v-if="addLocale">
+        <collection
+          :item="addLocale"
+          v-if="addLocale"
+          :buttons="
+          [
+            { label: 'cancel', action:'cancel' }
+          ]"
+        />
+        <div class="dropdown" v-if="!filter">
+          select locale:
+          <select v-model="dropdown">
+            <option v-for="locale in locales" :value="locale">{{locale}}</option>
+          </select>
+        </div>
+        <item
+          v-if="currentLanguageFilter"
+          :item="addLocale"
+          :locale="currentLanguageFilter"
+          :buttons="[ { label:'add'} ]"
+          :onButton="onCreateLocale"
+        />
+      </div>
+    </div>
+
+  </div>
+
+  <prompt v-if="removeItem"
+    title="Delete Tag ? "
+    :buttons="[ { label:'NO', action:false }, { label:'OK', action:true }]"
+    :onButton="onConfirmDelete">
+    <p class="prompt-title">Delete Tag-ID: <span>{{removeItem.id}}</span> ?</p>
+    <div class="message" v-if="removeItem.language.length">
+      This will remove all locales:
+    <span v-for="(item, count) in removeItem.language">{{item.locale}}
+      <span v-if="count < removeItem.language.length - 1">,</span>
+    </span>
+  </div>
+  </prompt>
+
+</div>
