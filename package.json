@@ -1,8 +1,8 @@
 {
   "name": "vue-translation-tool",
   "version": "1.0.0",
-  "description": "vue copy editor",
-  "main": "dist/vue-copy-editor.js",
+  "description": "vue translation tool",
+  "main": "dist/vue-translation-tool.js",
   "repository": {
     "type": "git",
     "url": ""
