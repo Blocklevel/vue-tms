@@ -1,6 +1,6 @@
 {
   "name": "vue-translation-tool",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vue translation tool",
   "main": "dist/vue-translation-tool.js",
   "repository": {
