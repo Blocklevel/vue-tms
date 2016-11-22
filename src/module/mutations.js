@@ -1,7 +1,6 @@
 import {
   JSON_DATA,
   LOAD_JSON,
-  AVAILABE_LOCALES,
   CURRENT_ITEM,
   REMOVE_ITEM,
   REMOVE_LOCALE,
@@ -32,7 +31,23 @@ const hasLocale = (locales, item, locale) => {
 }
 export default {
   [JSON_DATA] (state, payload) {
+    const before = state.json.length
     enrich(state.json, payload)
+    state.stats.added = state.json.length - before
+    state.stats.updated = state.json.length - payload.length
+    state.stats.total = state.json.length
+
+    while (state.availableLocales.length) state.availableLocales.pop()
+
+    state.json.forEach((item) => {
+      item.language.forEach((value) => {
+        if (state.availableLocales.indexOf(value.locale) === -1) {
+          state.availableLocales.push(value.locale)
+        }
+      })
+    })
+
+    state.availableLocales.sort()
   },
   [LOAD_JSON] (state, payload) {
     state.isLoading = payload
@@ -52,10 +67,6 @@ export default {
   },
   [LOCALE_DISABLED] (state) {
     state.localeIsDisabled = hasLocale(state.locales, state.currentItem, state.filter)
-  },
-
-  [AVAILABE_LOCALES] (state, payload) {
-    state.availableLocales = payload
   },
   [ADD_ITEM] (state, payload) {
     const { item, content, locale } = payload

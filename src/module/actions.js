@@ -1,6 +1,5 @@
 import {
   JSON_DATA,
-  AVAILABE_LOCALES,
   LOAD_JSON,
   CURRENT_ITEM,
   REMOVE_ITEM,
@@ -23,16 +22,6 @@ import {
 export default {
   [JSON_DATA]: ({ commit }, json) => {
     commit(JSON_DATA, json)
-
-    const availableLocales = []
-    json.forEach((item) => {
-      item.language.forEach((value) => {
-        if (availableLocales.indexOf(value.locale) !== -1) return
-        availableLocales.push(value.locale)
-      })
-    })
-    availableLocales.sort()
-    commit(AVAILABE_LOCALES, availableLocales)
   },
   [LOAD_JSON]: ({ commit }, payload) => {
     commit(LOAD_JSON, payload)

@@ -15,5 +15,6 @@ export default {
   localeIsDisabled: false,
   emptiesOnly: false,
   search: null,
+  stats: {},
   locales: []
 }

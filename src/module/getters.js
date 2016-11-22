@@ -14,3 +14,4 @@ export const localeIsDisabled = state => state.localeIsDisabled
 export const filter = state => state.filter
 export const emptiesOnly = state => state.emptiesOnly
 export const search = state => state.search
+export const stats = state => state.stats

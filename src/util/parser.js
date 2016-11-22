@@ -32,9 +32,8 @@ export const enrich = (a, b) => {
   }, a)
 }
 
-export const importer = (raw, locale) => {
+export const validateJSON = (json, locale) => {
   return new Promise((resolve, reject) => {
-    let json = JSON.parse(raw)
     // does the json file have multiple languages or is it a single language export...
     const single = json instanceof Object && !(json instanceof Array)
     const multi = json instanceof Object && json instanceof Array
@@ -67,5 +66,31 @@ export const importer = (raw, locale) => {
       }
     }
     return resolve(json)
+  })
+}
+export const JSONParser = (raw, locale) => {
+  return new Promise((resolve, reject) => {
+    let json = JSON.parse(raw)
+    return resolve(validateJSON(json, locale))
+  })
+}
+
+export const CSVParser = (raw, locale) => {
+  return new Promise((resolve, reject) => {
+    let array = raw.split('`')
+    let json = {}
+    for (let i = 0; i < array.length; i += 4) {
+      if (array[i + 1]) json[array[i + 1]] = array[i + 3]
+    }
+    return resolve(validateJSON(json, locale))
+  })
+}
+
+export const importer = (raw, locale) => {
+  return JSONParser(raw, locale).catch(() => {
+    console.warn('imported language file is not a json, will try parsing as a csv')
+    return CSVParser(raw, locale).catch(() => {
+      console.warn('imported language could not be parsed..')
+    })
   })
 }

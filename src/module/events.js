@@ -1,6 +1,5 @@
 export const JSON_DATA = 'JSON_DATA'
 export const LOAD_JSON = 'LOAD_JSON'
-export const AVAILABE_LOCALES = 'AVAILABE_LOCALES'
 export const CURRENT_ITEM = 'CURRENT_ITEM'
 export const REMOVE_ITEM = 'REMOVE_ITEM'
 export const REMOVE_LOCALE = 'REMOVE_LOCALE'
