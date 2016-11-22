@@ -5,7 +5,7 @@
   "main": "dist/vue-translation-tool.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Blocklevel/vue-translation-tool"
   },
   "scripts": {
     "dev": "webpack --config webpack/dev/webpack.config.js -w",
@@ -14,12 +14,12 @@
     "test:watch": "karma start ./test/karma.config.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "supr3m0 <supr3m0@remodiego.com>",
   "license": "ISC",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/Blocklevel/vue-translation-tool/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/Blocklevel/vue-translation-tool/blob/master/README.md",
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.0.0",
