@@ -32,7 +32,9 @@ export default {
       this.loadFile(file)
     },
     getLocaleFromFileName (file) {
-      return file.name.replace('.json', '')
+      let parsed = file.name.split('.')
+      parsed.pop()
+      return parsed.join('.')
     },
     loadFile (file) {
       this.reader = new window.FileReader()
@@ -92,6 +94,9 @@ export default {
     }
   },
   computed: {
+    stats () {
+      return this.$store.getters.stats
+    },
     download () {
       return window.URL.createObjectURL(new window.Blob([this.data], { type: 'text/json;charset=utf-8' }))
     }

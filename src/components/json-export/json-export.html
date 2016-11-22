@@ -1,9 +1,17 @@
 <div class="json-export-component">
   <form action="#">
-    <input style="visibility:hidden" id="file" type="file" accept=".json" @change="onFileChange"></input>
+    <input style="visibility:hidden" id="file" type="file" accept=".csv, .json" @change="onFileChange"></input>
   </form>
-  <button><label for="file">Load JSON file</label></button>
+  <button><label for="file">Load JSON or CSV file</label></button>
   <p v-if="data"><a :download="name" :href="download">Download JSON file</a></p>
+
+  <div v-if="stats">
+    <h2>Stats</h2>
+    <p>Total: {{ stats.total }}</p>
+    <p>Added: {{ stats.added }}</p>
+    <p>Updated: {{ stats.updated }}</p>
+  </div>
+
   <div v-if="data">
     <h2>Export</h2>
     <pre>{{data}}</pre>
