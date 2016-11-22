@@ -1,5 +1,5 @@
 {
-  "name": "vue-copy-editor",
+  "name": "vue-translation-tool",
   "version": "1.0.0",
   "description": "vue copy editor",
   "main": "dist/vue-copy-editor.js",
@@ -8,7 +8,10 @@
     "url": ""
   },
   "scripts": {
-    "dev": "./node_modules/.bin/webpack -w"
+    "dev": "webpack --config webpack/dev/webpack.config.js -w",
+    "build": "webpack --config webpack/prod/webpack.config.js",
+    "test": "karma start ./test/karma.config.js --singleRun",
+    "test:watch": "karma start ./test/karma.config.js"
   },
   "keywords": [],
   "author": "",
@@ -36,10 +39,12 @@
     "eslint-plugin-standard": "^2.0.1",
     "html-loader": "^0.4.4",
     "node-sass": "^3.11.2",
+    "progress-bar-webpack-plugin": "^1.9.0",
     "sass-loader": "^4.0.2",
     "storage-helper": "^1.0.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-merge": "^0.17.0"
   },
   "dependencies": {
     "json-editor": "^0.7.28"

@@ -19,7 +19,6 @@ import {
   EMPTIES_ONLY,
   SEARCH
 } from './events'
-import JSONLoader from '../util/JSONLoader'
 
 export default {
   [JSON_DATA]: ({ commit }, json) => {

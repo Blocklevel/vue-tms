@@ -20,11 +20,6 @@ export default {
   mounted () {
     this.update()
   },
-  watch: {
-    json () {
-      console.log('json is updated')
-    }
-  },
   methods: {
     update () {
       this.data = JSON.stringify(this.json, null, 2)

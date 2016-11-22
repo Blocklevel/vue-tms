@@ -20,12 +20,12 @@ import {
   ADD_ITEM,
   CREATE_ITEM,
   UPDATE_CREATE_ITEM,
-  DELETE_ITEM,
+  DELETE_ITEM
  } from './module/events'
 
 const install = (Vue, options = {}) => {
   const { store } = options
-  const id = 'vue-copy-editor'
+  const id = 'vue-translation-tool'
 
   store.registerModule(id, module)
 
